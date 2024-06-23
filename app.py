@@ -76,5 +76,9 @@ def compile_instructions():
         return "Internal Server Error", 500
 
 
+@app.route("/", methods=["GET"])
+def root():
+    return "hello Flask"
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
