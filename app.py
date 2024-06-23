@@ -1,8 +1,9 @@
 from flask import Flask, request
 import json
+from flask import Flask, request, json
+from src import database, core, PrBaseException
 
-from src import core, PrBaseException
-
+database.init_db()
 
 app = Flask(__name__)
 core = core.Core()
