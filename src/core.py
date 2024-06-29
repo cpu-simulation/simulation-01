@@ -6,7 +6,20 @@ class Core:
     def __init__(self) -> None:
         self.db_connection = get_db_connection()
         self.init_registers()
-        
+
+    def init_registers(self):
+        cursor = self.db_connection.cursor()
+        registers = {'PC' : '000', 
+                     'AR' : '000', 
+                     'IR' : '0000', 
+                     'DR' : '0000', 
+                     'AC' : '0000', 
+                     'TR' : '0000',
+                     'E' : '0'}
+        for key, value in registers.iteritems():
+            cursor.execute("INSERT OR IGNORE INTO registers (name, value) VALUES (?, ?)", (key, value))
+        self.db_connection.commit()
+
     def memory_write(self, data: dict) -> None:
         """
         set a memory value in a single given address
