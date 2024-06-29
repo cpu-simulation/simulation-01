@@ -1,8 +1,12 @@
 #! usr/bin/python
+
+from database import get_db_connection
+
 class Core:
     def __init__(self) -> None:
-        pass
-
+        self.db_connection = get_db_connection()
+        self.init_registers()
+        
     def memory_write(self, data: dict) -> None:
         """
         set a memory value in a single given address

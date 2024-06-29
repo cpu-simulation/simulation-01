@@ -2,9 +2,10 @@ from flask import Flask, request
 import json
 from flask import Flask, request, json
 from src import database, core, PrBaseException
+import logging
 
-database.init_db()
 
+logging.basicConfig(filename='info_flask.log', level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 app = Flask(__name__)
 core = core.Core()
 
@@ -77,8 +78,9 @@ def compile_instructions():
 
 
 @app.route("/", methods=["GET"])
-def root():
-    return "hello Flask"
+def root(): 
+    return "Hello Flask"
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    database.init_db()
+    app.run(host="127.0.0.1", port=8000, debug=True)
